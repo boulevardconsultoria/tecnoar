@@ -140,7 +140,7 @@
 }
 
 *{ margin:0; padding:0; box-sizing:border-box; }
-html{ scroll-behavior:smooth; scroll-padding-top: calc(var(--header-h) + var(--topbar-h)); }
+html{ overflow-x: hidden; scroll-behavior:smooth; scroll-padding-top: calc(var(--header-h) + var(--topbar-h)); }
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior:auto; }
   *, *::before, *::after{ animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
@@ -153,7 +153,8 @@ body{
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: clip;
+  overflow-x: hidden;
+  max-width: 100vw;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -209,6 +210,20 @@ h1,h2,h3,h4{
 .reveal-left.in{ opacity:1; transform: translateX(0); }
 .reveal-right.in{ opacity:1; transform: translateX(0); }
 .reveal-scale.in{ opacity:1; transform: scale(1); }
+
+.skeleton{
+  position:relative;
+  background: linear-gradient(90deg, #e8edf2 25%, #f0f4f8 50%, #e8edf2 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.6s ease-in-out infinite;
+}
+@keyframes skeleton-shimmer{
+  0%{ background-position:200% 0; }
+  100%{ background-position:-200% 0; }
+}
+.serv-card, .bast-card, .g-item{
+  background: #e8edf2;
+}
 
 .section{ padding: clamp(64px, 8vw, 120px) 0; }
 .section-soft{ background: var(--bg-soft); }
@@ -1380,7 +1395,7 @@ footer{
 
 <!-- SPLASH SCREEN -->
 <div id="splash" style="position:fixed;inset:0;z-index:9999;background:#fff;display:flex;align-items:center;justify-content:center;transition:opacity .4s ease,visibility .4s ease">
-  <img src="https://i.ibb.co/Y7D2D6Lg/Save-Clip-App-431630984-772396881079079-144881482519265891-n-1.png" alt="TECNOAR" style="width:clamp(80px,18vw,160px);height:auto;animation:splash-pulse 1.2s ease-in-out infinite alternate">
+  <img src="https://i.ibb.co/Y7D2D6Lg/Save-Clip-App-431630984-772396881079079-144881482519265891-n-1.png" alt="TECNOAR" fetchpriority="high" decoding="sync" style="width:clamp(80px,18vw,160px);height:auto;animation:splash-pulse 1.2s ease-in-out infinite alternate">
 </div>
 
 <!-- TOP BAR -->
@@ -1432,7 +1447,9 @@ footer{
 <!-- MOBILE DRAWER -->
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-head">
-    <img src="https://i.ibb.co/Y7D2D6Lg/Save-Clip-App-431630984-772396881079079-144881482519265891-n-1.png" alt="TECNOAR">
+    <img src="https://i.ibb.co/Y7D2D6Lg/Save-Clip-App-431630984-772396881079079-144881482519265891-n-1.png" alt="TECNOAR" loading="lazy" decoding="async">
+
+
     <button class="mm-close" id="mmClose" aria-label="Fechar menu">
       <svg viewBox="0 0 24 24" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
@@ -1457,7 +1474,7 @@ footer{
 
 <!-- HERO -->
 <section class="hero" id="heroSection">
-  <img class="hero-bg" src="https://i.ibb.co/ymtYn4FB/Save-Clip-App-652772046-18091087487149176-4503806795399529223-n.jpg" alt="" aria-hidden="true">
+  <img class="hero-bg" src="https://i.ibb.co/ymtYn4FB/Save-Clip-App-652772046-18091087487149176-4503806795399529223-n.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
   <div class="wrap hero-inner">
 
     <!-- DESKTOP HERO -->
@@ -1480,7 +1497,7 @@ footer{
 
       <div class="hero-visual reveal reveal-delay-2">
         <img class="hero-img-main" src="https://i.ibb.co/ymtYn4FB/Save-Clip-App-652772046-18091087487149176-4503806795399529223-n.jpg" alt="Serviço de ar-condicionado automotivo na TECNOAR" fetchpriority="high">
-        <img class="hero-img-sub" src="https://i.ibb.co/6JZqZPNb/Save-Clip-App-657233599-18094464554038648-2668191874854087859-n.jpg" alt="Diagnóstico de ar-condicionado na TECNOAR">
+        <img class="hero-img-sub" src="https://i.ibb.co/6JZqZPNb/Save-Clip-App-657233599-18094464554038648-2668191874854087859-n.jpg" alt="Diagnóstico de ar-condicionado na TECNOAR" loading="lazy">
         <div class="temp-stat" id="tempPanel">
           <div class="temp-stat-value" id="tempNumber"><span id="tempValue">31</span><span class="deg">°C</span></div>
           <div class="temp-stat-label">temperatura de saída</div>
@@ -1876,27 +1893,6 @@ footer{
   <img id="lightboxImg" src="" alt="Foto ampliada">
 </div>
 
-<!-- PROCESSO -->
-<section class="section" id="processo">
-  <div class="wrap">
-    <div class="section-head centered reveal-right">
-      <div class="eyebrow">Como funciona</div>
-      <h2>Da recepção à entrega com garantia</h2>
-      <p>Seis etapas, sempre nessa ordem — porque pular o diagnóstico é o que gera retorno de cliente com o mesmo problema.</p>
-    </div>
-
-    <div class="timeline reveal-left">
-      <div class="tl-item"><div class="tl-num">1</div><h4>Recepção</h4><p>Você chega ou manda uma mensagem. A gente escuta o sintoma e já prepara a bancada.</p></div>
-      <div class="tl-item"><div class="tl-num">2</div><h4>Diagnóstico técnico</h4><p>Pressurização com nitrogênio, teste eletrônico de vazamento e leitura dos sensores do sistema.</p></div>
-      <div class="tl-item"><div class="tl-num">3</div><h4>Orçamento detalhado</h4><p>Explicamos o problema, mostramos o diagnóstico e você aprova antes de qualquer intervenção.</p></div>
-      <div class="tl-item"><div class="tl-num">4</div><h4>Reparo especializado</h4><p>Troca de componentes, solda, recarga ou higienização — com o equipamento certo para cada etapa.</p></div>
-      <div class="tl-item"><div class="tl-num">5</div><h4>Teste de qualidade</h4><p>Medição da temperatura de saída, verificação de pressão e funcionamento geral do sistema.</p></div>
-      <div class="tl-item"><div class="tl-num">6</div><h4>Entrega com garantia</h4><p>Veículo liberado com laudo do serviço realizado e garantia assegurada pela TECNOAR.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- AVALIAÇÕES GOOGLE -->
 <!-- AVALIAÇÕES GOOGLE -->
 <section class="section section-soft" id="avaliacoes">
   <div class="wrap">
@@ -1932,6 +1928,37 @@ footer{
         <button id="avPrev" aria-label="Anterior"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></button>
         <div class="av-dots" id="avDots"></div>
         <button id="avNext" aria-label="Próximo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPE -->
+<section class="section" id="equipe">
+  <div class="wrap">
+    <div class="section-head reveal-left">
+      <div class="eyebrow">Quem faz</div>
+      <h2>Quem cuida do seu ar-condicionado</h2>
+      <p>Conheça a equipe por trás da TECNOAR.</p>
+    </div>
+    <div class="equipe-grid reveal-scale">
+      <div class="founder">
+        <div class="avatar">I</div>
+        <div>
+          <div class="role">Técnico & Sócio</div>
+          <h3>Ismael</h3>
+          <p>Especialista em climatização automotiva com anos de experiência em diagnóstico, reparo de compressores e sistemas de ar-condicionado.</p>
+          <a href="https://wa.me/5569984790036" target="_blank" rel="noopener">Falar com Ismael →</a>
+        </div>
+      </div>
+      <div class="founder">
+        <div class="avatar">R</div>
+        <div>
+          <div class="role">Técnico & Sócio</div>
+          <h3>Ricardo</h3>
+          <p>Especialista em manutenção de sistemas automotivos, responsável pelas soldas em alumínio e reparos estruturais do sistema de climatização.</p>
+          <a href="https://wa.me/5569984237015" target="_blank" rel="noopener">Falar com Ricardo →</a>
+        </div>
       </div>
     </div>
   </div>
@@ -2382,7 +2409,7 @@ footer{
 <!-- COOKIE CONSENT -->
 <div id="cookieConsent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9998;background:var(--primary-dark);color:rgba(255,255,255,0.85);padding:clamp(14px,1.4vw,18px) clamp(16px,2vw,24px);font-size:clamp(12px,0.95vw,14px);line-height:1.6;box-shadow:0 -4px 20px rgba(0,0,0,0.15);">
   <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:clamp(12px,1.6vw,20px);flex-wrap:wrap;">
-    <span>Usamos cookies para melhorar sua experiência. Ao continuar navegando, você aceita nossa <a href="#privacidade" style="color:var(--accent-light);text-decoration:underline;text-underline-offset:2px;">política de privacidade</a>.</span>
+    <span>Usamos cookies para melhorar sua experiência. Ao continuar navegando, você aceita nossa <a href="#" onclick="event.preventDefault();alert('Política de privacidade disponível em breve.')" style="color:var(--accent-light);text-decoration:underline;text-underline-offset:2px;">política de privacidade</a>.</span>
     <div style="display:flex;gap:clamp(8px,1vw,12px);flex-shrink:0;">
       <button id="cookieAccept" style="background:var(--accent);color:#fff;border:none;padding:clamp(6px,0.6vw,10px) clamp(16px,1.6vw,24px);border-radius:6px;font-weight:700;font-size:clamp(12px,0.9vw,13px);cursor:pointer;">Aceitar</button>
     </div>
