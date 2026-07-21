@@ -153,7 +153,8 @@ body{
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
+  -webkit-tap-highlight-color: transparent;
 }
 
 img,svg{ display:block; max-width:100%; height:auto; }
@@ -1308,12 +1309,17 @@ footer{
   .cta-row .btn{ width: 100%; }
   .section-head h2{ font-size: clamp(1.3rem, 5.5vw, 1.5rem); }
   .section-head p{ font-size: clamp(13px, 3.4vw, 14px); }
+  .section, .section-soft{ padding: clamp(40px, 8vw, 48px) 0; }
   .founder{ padding: clamp(18px, 3vw, 20px); flex-direction:column; align-items:center; text-align:center; }
   .founder a{ justify-content:center; }
   .mini-cta{ flex-direction: column; text-align:center; padding: clamp(20px, 4vw, 24px); }
   .mini-cta .btn{ width: 100%; }
+  .mini-cta h3{ font-size: clamp(15px, 3.6vw, 17px); }
+  .mini-cta p{ font-size: clamp(12px, 3vw, 13px); }
   .av-header{ flex-direction: column; align-items:stretch; }
   .av-header > div{ justify-content:center; }
+  .av-header > div:last-child{ flex-direction:column; align-items:stretch; }
+  .av-header > div:last-child a{ width:100%; justify-content:center; }
   .serv-card{ aspect-ratio: auto; min-height: clamp(180px, 50vw, 220px); }
   .bast-grid{ gap: 10px; }
   .tl-item{ padding-left: clamp(44px, 10vw, 50px); }
@@ -1358,6 +1364,15 @@ footer{
   .dif-card .icon svg{ width:clamp(14px, 3.2vw, 16px); height:auto; }
   .dif-card h3{ font-size:clamp(13px, 3.2vw, 14px); margin-bottom:clamp(5px, 1.2vw, 6px); }
   .dif-card p{ font-size:clamp(11.5px, 2.8vw, 12.5px); }
+  .galeria-grid{ gap: clamp(8px, 1.6vw, 10px); }
+  .bast-grid{ gap: clamp(8px, 1.6vw, 10px); }
+  .serv-grid{ gap: clamp(10px, 2.4vw, 14px); }
+  .timeline{ max-width:100%; }
+  .tl-item{ padding-left: clamp(44px, 10vw, 50px); padding-bottom: clamp(24px, 5vw, 28px); }
+  .faq-list{ max-width:100%; }
+  .contato-grid{ gap: clamp(20px, 4vw, 24px); }
+  .footer-bottom{ flex-direction:column; text-align:center; gap:4px; }
+  .info-block .value{ font-size: clamp(13px, 3.4vw, 14px); }
 }
 </style>
 </head>
