@@ -1040,6 +1040,24 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
 @media (max-width: 760px){ .equipe-grid{ grid-template-columns: 1fr; } }
 
 /* ---------- FAQ ---------- */
+.faq-cta{
+  max-width: 520px;
+  margin: 0 auto;
+  text-align:center;
+}
+.faq-cta p{
+  font-size: clamp(14px, 1.1vw, 16px);
+  color: var(--muted);
+  margin-bottom: clamp(20px, 2.4vw, 28px);
+  line-height:1.7;
+}
+.faq-chat-btn{
+  margin: 0 auto;
+  font-size: clamp(14px, 1.1vw, 15px);
+  padding: clamp(14px, 1.2vw, 16px) clamp(28px, 2.6vw, 34px);
+  border-radius: 10px;
+}
+.faq-seo{ display:none; }
 .faq-list{ max-width: clamp(640px, 60vw, 760px); margin: 0 auto; }
 .faq-item{ border-bottom: 1px solid var(--line); }
 .faq-item summary{
@@ -2259,30 +2277,37 @@ footer{
   </div>
 </section>
 
-<!-- FAQ (estático para SEO) -->
+<!-- FAQ (dados ocultos para SEO) -->
 <section class="section" id="faq">
   <div class="wrap">
     <div class="section-head centered reveal-right">
       <div class="eyebrow">Dúvidas frequentes</div>
       <h2>Perguntas que a gente mais recebe</h2>
     </div>
-    <div class="faq-list reveal-left" itemscope itemtype="https://schema.org/FAQPage">
-      <details class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <summary itemprop="name">Preciso agendar horário para levar o carro?</summary>
+    <div class="faq-cta reveal-left">
+      <p>Tire suas dúvidas sobre agendamento, diagnóstico, prazos, serviços e mais com o <strong>Assistente TECNOAR</strong>.</p>
+      <button class="btn btn-primary faq-chat-btn" id="faqChatBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Abrir chat de dúvidas
+      </button>
+    </div>
+    <div class="faq-seo" itemscope itemtype="https://schema.org/FAQPage" aria-hidden="true">
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">Preciso agendar horário para levar o carro?</h3>
         <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">O ideal é chamar no WhatsApp antes, pra já chegar direto pra bancada sem esperar. Avaliações rápidas também são feitas na hora, conforme a agenda do dia.</p></div>
-      </details>
-      <details class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <summary itemprop="name">A TECNOAR atende carros de qualquer marca e modelo?</summary>
+      </div>
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">A TECNOAR atende carros de qualquer marca e modelo?</h3>
         <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">Sim. O sistema de ar-condicionado segue o mesmo princípio entre marcas, e a oficina tem equipamento compatível com R-134a e R-1234yf.</p></div>
-      </details>
-      <details class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <summary itemprop="name">Como funciona o diagnóstico antes do orçamento?</summary>
+      </div>
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">Como funciona o diagnóstico antes do orçamento?</h3>
         <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">O sistema é pressurizado com nitrogênio e testado com detector eletrônico de vazamento antes de qualquer peça ser aberta. O orçamento só é fechado depois de identificada a causa real.</p></div>
-      </details>
-      <details class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <summary itemprop="name">Quanto tempo demora um serviço de ar-condicionado?</summary>
+      </div>
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">Quanto tempo demora um serviço de ar-condicionado?</h3>
         <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">Varia com o serviço: recarga de gás ou higienização costuma resolver no mesmo dia; reparos de compressor ou evaporador podem levar mais tempo, dependendo da peça.</p></div>
-      </details>
+      </div>
     </div>
   </div>
 </section>
@@ -2769,6 +2794,8 @@ footer{
     chatOverlay.classList.remove('open');
   }
   if(chatToggle) chatToggle.addEventListener('click', openChat);
+  const faqChatBtn = document.getElementById('faqChatBtn');
+  if(faqChatBtn) faqChatBtn.addEventListener('click', openChat);
   if(chatPopupClose) chatPopupClose.addEventListener('click', closeChat);
   if(chatOverlay) chatOverlay.addEventListener('click', closeChat);
 
