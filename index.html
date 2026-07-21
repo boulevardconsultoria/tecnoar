@@ -1074,6 +1074,157 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
   line-height:1.7;
 }
 
+/* ---------- FAQ CHAT ---------- */
+.chat-wrap{
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: clamp(14px, 1.4vw, 18px);
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+}
+.chat-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: clamp(14px, 1.4vw, 18px) clamp(18px, 1.8vw, 22px);
+  border-bottom: 1px solid var(--line);
+  background: var(--primary);
+  color:#fff;
+}
+.chat-header-info{ display:flex; align-items:center; gap:12px; }
+.chat-avatar{
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display:flex; align-items:center; justify-content:center;
+  font-family: var(--font-display);
+  font-weight:800;
+  font-size: 16px;
+  flex-shrink:0;
+}
+.chat-name{ font-weight:700; font-size: clamp(14px, 1.1vw, 15px); }
+.chat-status{ font-size: clamp(11px, 0.8vw, 12px); opacity:0.7; }
+.chat-clear{
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.1);
+  display:flex; align-items:center; justify-content:center;
+  transition: background .2s;
+  flex-shrink:0;
+  color:#fff;
+}
+.chat-clear:hover{ background: rgba(255,255,255,0.2); }
+.chat-msgs{
+  padding: clamp(16px, 1.6vw, 20px);
+  max-height: 420px;
+  overflow-y: auto;
+  display:flex;
+  flex-direction:column;
+  gap: 14px;
+  background: var(--bg-soft);
+}
+.msg{ display:flex; }
+.msg-bot{ justify-content:flex-start; }
+.msg-user{ justify-content:flex-end; }
+.msg-bubble{
+  max-width: 88%;
+  padding: clamp(12px, 1.2vw, 16px) clamp(14px, 1.4vw, 18px);
+  border-radius: clamp(12px, 1.2vw, 14px);
+  font-size: clamp(13px, 1vw, 14.5px);
+  line-height: 1.7;
+  word-wrap: break-word;
+  animation: msgIn .3s ease;
+}
+@keyframes msgIn{
+  0%{ opacity:0; transform:translateY(8px) scale(0.97); }
+  100%{ opacity:1; transform:translateY(0) scale(1); }
+}
+.msg-bot .msg-bubble{
+  background: #fff;
+  border: 1px solid var(--line);
+  color: var(--text);
+  border-bottom-left-radius: 4px;
+}
+.msg-user .msg-bubble{
+  background: var(--primary);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+.msg-wa-btn{
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  background: #25D366;
+  color:#fff;
+  font-weight:700;
+  font-size: clamp(12px, 0.95vw, 13.5px);
+  padding: clamp(8px, 0.8vw, 10px) clamp(14px, 1.4vw, 18px);
+  border-radius: 8px;
+  margin-top: 10px;
+  transition: opacity .2s;
+}
+.msg-wa-btn:hover{ opacity:0.9; }
+.msg-wa-btn svg{ width:16px; height:16px; flex-shrink:0; }
+.msg-typing{
+  display:flex;
+  gap: 5px;
+  padding: clamp(10px, 1vw, 12px) clamp(14px, 1.4vw, 18px);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: clamp(12px, 1.2vw, 14px);
+  border-bottom-left-radius: 4px;
+  max-width: 70px;
+  margin-bottom: 4px;
+}
+.msg-typing span{
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+  animation: typingDot 1.2s infinite;
+}
+.msg-typing span:nth-child(2){ animation-delay:.2s; }
+.msg-typing span:nth-child(3){ animation-delay:.4s; }
+@keyframes typingDot{
+  0%,60%,100%{ opacity:0.3; transform:scale(0.8); }
+  30%{ opacity:1; transform:scale(1); background: var(--accent); }
+}
+.chat-input-wrap{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  padding: clamp(10px, 1.2vw, 14px) clamp(16px, 1.6vw, 20px);
+  border-top: 1px solid var(--line);
+  background: #fff;
+}
+.chat-input{
+  flex:1;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: clamp(10px, 1vw, 12px) clamp(14px, 1.4vw, 16px);
+  font-family: var(--font-body);
+  font-size: clamp(13px, 1vw, 14.5px);
+  outline: none;
+  transition: border-color .2s;
+}
+.chat-input:focus{ border-color: var(--accent); }
+.chat-send{
+  width: clamp(42px, 3.6vw, 46px);
+  height: clamp(42px, 3.6vw, 46px);
+  border-radius: 12px;
+  background: var(--accent);
+  color: #fff;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+  transition: opacity .2s;
+}
+.chat-send:hover{ opacity:0.85; }
+.chat-send:disabled{ opacity:0.4; cursor:default; }
+@media (max-width: 480px){
+  .chat-msgs{ max-height: 340px; }
+}
+
 /* ---------- CONTATO ---------- */
 .contato-grid{
   display:grid;
@@ -2046,31 +2197,46 @@ footer{
   </div>
 </section>
 
-<!-- FAQ -->
-<section class="section">
+<!-- FAQ CHAT -->
+<section class="section" id="faqChat">
   <div class="wrap">
     <div class="section-head centered reveal-right">
       <div class="eyebrow">Dúvidas frequentes</div>
       <h2>Perguntas que a gente mais recebe</h2>
     </div>
 
-    <div class="faq-list reveal-left">
-      <details class="faq-item">
-        <summary>Preciso agendar horário para levar o carro?</summary>
-        <p>O ideal é chamar no WhatsApp antes, pra já chegar direto pra bancada sem esperar. Avaliações rápidas também são feitas na hora, conforme a agenda do dia.</p>
-      </details>
-      <details class="faq-item">
-        <summary>A TECNOAR atende carros de qualquer marca e modelo?</summary>
-        <p>Sim. O sistema de ar-condicionado segue o mesmo princípio entre marcas, e a oficina tem equipamento compatível com R-134a e R-1234yf.</p>
-      </details>
-      <details class="faq-item">
-        <summary>Como funciona o diagnóstico antes do orçamento?</summary>
-        <p>O sistema é pressurizado com nitrogênio e testado com detector eletrônico de vazamento antes de qualquer peça ser aberta. O orçamento só é fechado depois de identificada a causa real.</p>
-      </details>
-      <details class="faq-item">
-        <summary>Quanto tempo demora um serviço de ar-condicionado?</summary>
-        <p>Varia com o serviço: recarga de gás ou higienização costuma resolver no mesmo dia; reparos de compressor ou evaporador podem levar mais tempo, dependendo da peça.</p>
-      </details>
+    <div class="chat-wrap reveal-left">
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <div class="chat-avatar">T</div>
+          <div>
+            <div class="chat-name">Assistente TECNOAR</div>
+            <div class="chat-status">Online</div>
+          </div>
+        </div>
+        <button class="chat-clear" id="chatClear" aria-label="Limpar conversa">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        </button>
+      </div>
+      <div class="chat-msgs" id="chatMsgs">
+        <div class="msg msg-bot">
+          <div class="msg-bubble">
+            Olá! 😊 Eu sou o assistente virtual da TECNOAR.<br><br>
+            Pergunte sobre nossos serviços, agendamento, diagnóstico, prazos ou qualquer dúvida sobre ar-condicionado automotivo.<br><br>
+            <strong>Exemplos:</strong><br>
+            • "Precisa agendar?"<br>
+            • "Atende qualquer marca?"<br>
+            • "Quanto tempo demora?"<br>
+            • "Como funciona o diagnóstico?"
+          </div>
+        </div>
+      </div>
+      <div class="chat-input-wrap">
+        <input class="chat-input" id="chatInput" type="text" placeholder="Digite sua dúvida..." autocomplete="off">
+        <button class="chat-send" id="chatSend" aria-label="Enviar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 </section>
@@ -2404,6 +2570,173 @@ footer{
     renderReviews(0);
     if(prevBtn) prevBtn.addEventListener('click', ()=>{ if(page>0){ page--; renderReviews(page); } });
     if(nextBtn) nextBtn.addEventListener('click', ()=>{ if(page<totalPages-1){ page++; renderReviews(page); } });
+  }
+
+  // ---------- FAQ CHAT ----------
+  const faqData = [
+    {
+      keywords: ['agendar', 'horário', 'marcar', 'chegar', 'esperar', 'agenda', 'levar'],
+      answer: 'O ideal é chamar no WhatsApp antes, pra já chegar direto pra bancada sem esperar. Avaliações rápidas também são feitas na hora, conforme a agenda do dia.',
+      waText: 'Quero agendar um horário na TECNOAR'
+    },
+    {
+      keywords: ['marca', 'modelo', 'qualquer', 'atende', 'carro', 'veículo', 'ano'],
+      answer: 'Sim! Atendemos carros de qualquer marca e modelo. O sistema de ar-condicionado segue o mesmo princípio entre marcas, e a oficina tem equipamento compatível com R-134a e R-1234yf.',
+      waText: 'Meu carro é [modelo] — vocês atendem?'
+    },
+    {
+      keywords: ['diagnóstico', 'orçamento', 'vazamento', 'teste', 'pressurização', 'nitrogênio', 'detector', 'causa', 'abrir'],
+      answer: 'O sistema é pressurizado com nitrogênio e testado com detector eletrônico de vazamento antes de qualquer peça ser aberta. O orçamento só é fechado depois de identificada a causa real — sem chute, sem peça trocada à toa.',
+      waText: 'Quero agendar um diagnóstico de ar-condicionado'
+    },
+    {
+      keywords: ['tempo', 'demora', 'prazo', 'dias', 'horas', 'rápido', 'quanto'],
+      answer: 'Varia com o serviço: uma recarga de gás ou higienização costuma resolver no mesmo dia. Reparos de compressor ou evaporador podem levar mais tempo, dependendo da peça necessária.',
+      waText: 'Quanto tempo demora o serviço de [serviço]?'
+    },
+    {
+      keywords: ['preço', 'valor', 'custo', 'quanto custa', 'caro', 'barato', 'pagar'],
+      answer: 'O valor depende do diagnóstico. Cada caso é único — por isso não trabalhamos com tabela fixa sem ver o carro. O orçamento é detalhado e você aprova antes de qualquer serviço.',
+      waText: 'Quero saber o preço do serviço de [serviço]'
+    },
+    {
+      keywords: ['recarga', 'gás', 'r-134a', 'r-1234yf', 'refrigerante', 'óleo', 'compressor'],
+      answer: 'Fazemos recarga e reciclagem de gás R-134a e R-1234yf, com reposição de óleo do compressor. Tudo com equipamento profissional e medição de pressão antes e depois.',
+      waText: 'Quero fazer recarga de gás do ar-condicionado'
+    },
+    {
+      keywords: ['garantia', 'confiança', 'problema voltar', 'assegurada', 'laudo'],
+      answer: 'Todo serviço tem garantia. Se o problema voltar, você não paga de novo — a confiança vem do diagnóstico correto feito antes de qualquer intervenção.',
+      waText: 'Quero saber sobre a garantia dos serviços'
+    },
+    {
+      keywords: ['funcionamento', 'horário', 'aberto', 'funciona', 'sábado', 'domingo', 'fechado'],
+      answer: 'Funcionamos de segunda a sexta das 08h às 18h, e sábado das 08h às 12h. Fechado domingo. Mas você pode chamar no WhatsApp a qualquer hora que a gente responde assim que possível.',
+      waText: 'Qual o horário de funcionamento?'
+    },
+    {
+      keywords: ['endereço', 'local', 'fica', 'onde', 'chegar', 'mapa', 'fortaleza'],
+      answer: 'Ficamos na Avenida Fortaleza, 3884, Bairro Centenário — em Rolim de Moura, RO. CEP 76940-000. É a principal avenida da cidade, fácil de localizar.',
+      waText: 'Qual o endereço da TECNOAR?'
+    },
+    {
+      keywords: ['higienização', 'cheiro', 'fungo', 'bactéria', 'limpeza', 'evaporadora', 'mofo'],
+      answer: 'Fazemos higienização completa do sistema com eliminação de fungos e bactérias, incluindo limpeza da caixa evaporadora. Ótimo para quem sente cheiro estranho ao ligar o ar.',
+      waText: 'Quero fazer higienização do ar-condicionado'
+    },
+    {
+      keywords: ['filtro', 'cabine', 'trocar', 'qualidade do ar', 'poeira'],
+      answer: 'Fazemos a troca do filtro de cabine para melhorar a qualidade do ar interno do veículo. É uma manutenção simples que faz diferença no dia a dia.',
+      waText: 'Quero trocar o filtro de cabine'
+    },
+    {
+      keywords: ['solda', 'alumínio', 'mangueira', 'tubulação', 'vedação', 'o-ring', 'válvula'],
+      answer: 'Fazemos solda especializada em alumínio, troca de mangueiras, tubulações, válvulas e anéis de vedação (O-rings). Tudo com equipamento adequado para每个 tipo de componente.',
+      waText: 'Preciso de reparo em mangueiras/solda do ar-condicionado'
+    },
+    {
+      keywords: ['ventilador', 'ventoinha', 'não gelar', 'quente', 'ar fraco', 'gela pouco'],
+      answer: 'Pode ser desde uma recarga simples até um reparo mais complexo no compressor ou evaporador. O primeiro passo é trazer o carro para um diagnóstico completo. Sem chute, sem surpresa.',
+      waText: 'Meu ar-condicionado não está gelando'
+    }
+  ];
+
+  function findFaq(input){
+    const lower = input.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    let best = null, bestScore = 0;
+    for(const item of faqData){
+      let score = 0;
+      for(const kw of item.keywords){
+        const k = kw.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        if(lower.includes(k)) score++;
+        if(k.includes(lower) && lower.length > 3) score += 2;
+      }
+      if(score > bestScore){ bestScore = score; best = item; }
+    }
+    return bestScore >= 1 ? best : null;
+  }
+
+  function waUrl(text){
+    return 'https://wa.me/5569984790036?text=' + encodeURIComponent(text);
+  }
+
+  function escapeHtml(s){
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  const chatMsgs = document.getElementById('chatMsgs');
+  const chatInput = document.getElementById('chatInput');
+  const chatSend = document.getElementById('chatSend');
+  const chatClear = document.getElementById('chatClear');
+
+  function addTyping(){
+    const d = document.createElement('div');
+    d.className = 'msg msg-bot';
+    d.id = 'chatTyping';
+    d.innerHTML = '<div class="msg-typing"><span></span><span></span><span></span></div>';
+    chatMsgs.appendChild(d);
+    chatMsgs.scrollTop = chatMsgs.scrollHeight;
+  }
+
+  function removeTyping(){
+    const el = document.getElementById('chatTyping');
+    if(el) el.remove();
+  }
+
+  function addBotMsg(html){
+    removeTyping();
+    const d = document.createElement('div');
+    d.className = 'msg msg-bot';
+    d.innerHTML = '<div class="msg-bubble">' + html + '</div>';
+    chatMsgs.appendChild(d);
+    chatMsgs.scrollTop = chatMsgs.scrollHeight;
+  }
+
+  function addUserMsg(text){
+    const d = document.createElement('div');
+    d.className = 'msg msg-user';
+    d.innerHTML = '<div class="msg-bubble">' + escapeHtml(text) + '</div>';
+    chatMsgs.appendChild(d);
+    chatMsgs.scrollTop = chatMsgs.scrollHeight;
+  }
+
+  function handleQuestion(input){
+    const q = input.trim();
+    if(!q) return;
+    addUserMsg(q);
+    chatInput.value = '';
+    chatSend.disabled = true;
+    addTyping();
+
+    setTimeout(() => {
+      const match = findFaq(q);
+      let answer, waText;
+      if(match){
+        answer = match.answer;
+        waText = match.waText;
+      } else {
+        answer = 'Não entendi exatamente sua dúvida, mas fala com a gente no WhatsApp que a gente te ajuda rapidinho! 😊';
+        waText = 'Olá, tenho uma dúvida sobre ar-condicionado automotivo';
+      }
+      const waLink = waUrl(waText);
+      const html = answer + '<br><br><a class="msg-wa-btn" href="' + waLink + '" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.38 5.08L2 22l5.06-1.34A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg> Falar no WhatsApp</a>';
+      addBotMsg(html);
+      chatSend.disabled = false;
+    }, 800 + Math.random() * 600);
+  }
+
+  if(chatSend && chatInput){
+    chatSend.addEventListener('click', () => handleQuestion(chatInput.value));
+    chatInput.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter'){ e.preventDefault(); handleQuestion(chatInput.value); }
+    });
+  }
+  if(chatClear && chatMsgs){
+    chatClear.addEventListener('click', () => {
+      chatMsgs.innerHTML = '<div class="msg msg-bot"><div class="msg-bubble">Olá! 😊 Eu sou o assistente virtual da TECNOAR.<br><br>Pergunte sobre nossos serviços, agendamento, diagnóstico, prazos ou qualquer dúvida sobre ar-condicionado automotivo.<br><br><strong>Exemplos:</strong><br>• "Precisa agendar?"<br>• "Atende qualquer marca?"<br>• "Quanto tempo demora?"<br>• "Como funciona o diagnóstico?"</div></div>';
+    });
   }
 })();
 </script>
