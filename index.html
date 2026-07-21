@@ -653,6 +653,11 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
 .qb-track{
   display:flex;
   width:max-content;
+  animation: qb-scroll 180s linear infinite;
+}
+@keyframes qb-scroll{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); }
 }
 .qb-track-inner{
   display:flex;
@@ -2777,32 +2782,8 @@ footer{
     if(e.key === 'Escape' && chatPopup.classList.contains('open')) closeChat();
   });
 
-  // ---------- MARQUEE (requestAnimationFrame c/ delta time) ----------
-  var qbTrack = document.querySelector('.qb-track');
-  if (qbTrack && !reduced) {
-    var qbInner = qbTrack.querySelector('.qb-track-inner');
-    if (qbInner) {
-      var qbPos = 0;
-      var qbSpeed = 30; // px/s (faixa ideal 20-50)
-      var qbLast = 0;
-      function qbStep(now) {
-        if (!qbLast) qbLast = now;
-        var dt = Math.min(now - qbLast, 50);
-        qbLast = now;
-        var w = qbInner.offsetWidth;
-        if (w > 0) {
-          qbPos -= qbSpeed * (dt / 1000);
-          if (qbPos <= -w) qbPos += w;
-          qbTrack.style.transform = 'translateX(' + qbPos + 'px)';
-        }
-        requestAnimationFrame(qbStep);
-      }
-      requestAnimationFrame(function qbBoot(t) {
-        if (qbInner.offsetWidth > 0) { requestAnimationFrame(qbStep); }
-        else { requestAnimationFrame(qbBoot); }
-      });
-    }
-  }
+  // ---------- MARQUEE (prefers-reduced-motion) ----------
+  // animacao movida para CSS @keyframes no .qb-track
 })();
 </script>
 
