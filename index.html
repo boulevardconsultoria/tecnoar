@@ -30,6 +30,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="/img/logo.png" as="image" fetchpriority="high">
+<link rel="preload" href="https://i.ibb.co/ymtYn4FB/Save-Clip-App-652772046-18091087487149176-4503806795399529223-n.jpg" as="image" fetchpriority="high">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -693,8 +695,8 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
   100%{ transform:translateX(-50%); }
 }
 @keyframes splash-pulse{
-  0%{ transform:scale(0.9); opacity:0.6; }
-  100%{ transform:scale(1.06); opacity:1; }
+  0%{ transform:scale(0.95); opacity:0.5; }
+  100%{ transform:scale(1.04); opacity:1; }
 }
 
 /* ---------- STRIP BENEFITS ---------- */
@@ -1395,7 +1397,7 @@ footer{
 
 <!-- SPLASH SCREEN -->
 <div id="splash" style="position:fixed;inset:0;z-index:9999;background:#fff;display:flex;align-items:center;justify-content:center;transition:opacity .4s ease,visibility .4s ease">
-  <img src="/img/logo.png" alt="TECNOAR" fetchpriority="high" decoding="sync" style="width:clamp(80px,18vw,160px);height:auto;animation:splash-pulse 1.2s ease-in-out infinite alternate">
+  <img src="/img/logo.png" alt="TECNOAR" fetchpriority="high" decoding="sync" style="width:clamp(80px,18vw,160px);height:auto;animation:splash-pulse 2s ease-in-out infinite alternate">
 </div>
 
 <!-- TOP BAR -->
@@ -2155,7 +2157,7 @@ footer{
 
   // ---------- SCROLL PROGRESS BAR ----------
   const scrollBar = document.createElement('div');
-  scrollBar.style.cssText = 'position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-light));z-index:10001;width:0;transition:width .1s linear;';
+  scrollBar.style.cssText = 'position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-light));z-index:10001;width:0;will-change:width;transition:width .3s cubic-bezier(.22,1,.36,1);';
   document.body.appendChild(scrollBar);
   window.addEventListener('scroll', ()=>{
     const h = document.documentElement.scrollHeight - window.innerHeight;
