@@ -984,57 +984,6 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
 .tl-item p{ font-size: clamp(13px, 1.05vw, 14.5px); color: var(--muted); line-height:1.7; }
 
 /* ---------- EQUIPE ---------- */
-.equipe-grid{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(16px, 2vw, 24px);
-}
-.founder{
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: clamp(12px, 1.4vw, 18px);
-  padding: clamp(24px, 2.8vw, 34px);
-  display:flex;
-  gap: clamp(14px, 1.6vw, 20px);
-  align-items:flex-start;
-  transition: box-shadow .3s, transform .3s;
-}
-.founder:hover{ box-shadow: 0 12px 28px rgba(0,0,0,0.06); transform: translateY(-2px); }
-.founder .avatar{
-  width: clamp(46px, 4.6vw, 56px);
-  height: clamp(46px, 4.6vw, 56px);
-  border-radius: 50%;
-  background: var(--primary);
-  flex-shrink:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#fff;
-  font-family: var(--font-display);
-  font-weight:800;
-  font-size:clamp(14px, 1.4vw, 18px);
-}
-.founder .role{
-  font-size: clamp(11px, 0.95vw, 12.5px);
-  font-weight:700;
-  color: var(--secondary);
-  text-transform:uppercase;
-  letter-spacing:0.04em;
-}
-.founder h3{ font-size: clamp(17px, 1.6vw, 20px); font-weight: 800; margin: 6px 0 8px; }
-.founder p{ color: var(--muted); font-size: clamp(13px, 1vw, 14px); margin-bottom: clamp(10px, 1.2vw, 14px); line-height:1.7; }
-.founder a{
-  font-size: clamp(12px, 1vw, 13.5px);
-  font-weight:600;
-  color: var(--primary);
-  transition: color .2s, gap .2s;
-  display:inline-flex;
-  align-items:center;
-  gap:4px;
-}
-.founder a:hover{ color: var(--secondary); gap:8px; }
-@media (max-width: 760px){ .equipe-grid{ grid-template-columns: 1fr; } }
-
 /* ---------- FAQ ---------- */
 .faq-cta{
   max-width: 520px;
@@ -1658,7 +1607,6 @@ footer{
       <a href="#galeria">Galeria</a>
       <a href="#bastidores">Bastidores</a>
       <a href="#processo">Processo</a>
-      <a href="#equipe">Equipe</a>
       <a href="#contato">Contato</a>
     </nav>
     <div class="nav-right">
@@ -1689,7 +1637,6 @@ footer{
     <a href="#galeria">Galeria</a>
     <a href="#bastidores">Bastidores</a>
     <a href="#processo">Processo</a>
-    <a href="#equipe">Equipe</a>
     <a href="#contato">Contato</a>
   </nav>
   <div class="mobile-menu-footer">
@@ -2165,36 +2112,6 @@ footer{
 </section>
 
 <!-- EQUIPE -->
-<section class="section" id="equipe">
-  <div class="wrap">
-    <div class="section-head reveal-left">
-      <div class="eyebrow">Quem faz</div>
-      <h2>Quem cuida do seu ar-condicionado</h2>
-      <p>Conheça a equipe por trás da TECNOAR.</p>
-    </div>
-    <div class="equipe-grid reveal-scale">
-      <div class="founder">
-        <div class="avatar">I</div>
-        <div>
-          <div class="role">Técnico & Sócio</div>
-          <h3>Ismael</h3>
-          <p>Especialista em climatização automotiva com anos de experiência em diagnóstico, reparo de compressores e sistemas de ar-condicionado.</p>
-          <a href="https://wa.me/5569984790036" target="_blank" rel="noopener">Falar com Ismael →</a>
-        </div>
-      </div>
-      <div class="founder">
-        <div class="avatar">R</div>
-        <div>
-          <div class="role">Técnico & Sócio</div>
-          <h3>Ricardo</h3>
-          <p>Especialista em manutenção de sistemas automotivos, responsável pelas soldas em alumínio e reparos estruturais do sistema de climatização.</p>
-          <a href="https://wa.me/5569984237015" target="_blank" rel="noopener">Falar com Ricardo →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- CONTATO -->
 <section class="section" id="contato" style="background: #F0F1F6">
   <div class="wrap">
@@ -2331,7 +2248,6 @@ footer{
         <a href="#galeria">Galeria</a>
         <a href="#bastidores">Bastidores</a>
         <a href="#processo">Processo</a>
-        <a href="#equipe">Equipe</a>
       </div>
       <div class="footer-col">
         <h4>Contato</h4>
