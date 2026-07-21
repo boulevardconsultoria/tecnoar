@@ -647,30 +647,30 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
   background: var(--bg-soft);
   border-bottom: 1px solid var(--line);
   padding: clamp(8px, 1vw, 12px) 0;
+  width:100%;
   overflow:hidden;
   white-space:nowrap;
 }
 .qb-track{
   display:flex;
   width:max-content;
-  animation: qb-scroll 180s linear infinite;
-}
-@keyframes qb-scroll{
-  from{ transform:translateX(0); }
-  to{ transform:translateX(-50%); }
 }
 .qb-track-inner{
   display:flex;
   gap: clamp(24px, 3vw, 48px);
   align-items:center;
   flex-shrink:0;
-  min-width:max-content;
+  min-width:100%;
   padding: 0 clamp(12px, 1.5vw, 24px);
+  will-change:transform;
+  animation: qb-marquee-safari 90s linear infinite;
 }
 .qb-track-inner span{
   display:inline-flex;
   align-items:center;
   gap: clamp(6px, 0.8vw, 10px);
+  flex-shrink:0;
+  white-space:nowrap;
   font-size: clamp(12.5px, 1vw, 14px);
   font-weight:500;
   color: var(--text);
@@ -684,6 +684,13 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
   border-radius:50%;
   background:var(--accent);
   flex-shrink:0;
+}
+@keyframes qb-marquee-safari{
+  from{ transform:translate3d(0,0,0); }
+  to{ transform:translate3d(-100%,0,0); }
+}
+@supports (font-display:swap){
+  .qb-track-inner{ text-rendering:optimizeSpeed; }
 }
 @keyframes splash-pulse {
   0%   { transform: scale(0.94); }
@@ -2783,7 +2790,7 @@ footer{
   });
 
   // ---------- MARQUEE (prefers-reduced-motion) ----------
-  // animacao movida para CSS @keyframes no .qb-track
+  // animacao via @keyframes qb-marquee-safari nos .qb-track-inner
 })();
 </script>
 
