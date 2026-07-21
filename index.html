@@ -655,6 +655,11 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
   width:max-content;
   animation: qb-scroll 180s linear infinite;
   animation-timing-function: linear;
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 .qb-track-inner{
   display:flex;
@@ -684,10 +689,10 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
 }
 @keyframes qb-scroll{
   from{
-    transform:translateX(0);
+    transform:translate3d(0,0,0);
   }
   to{
-    transform:translateX(-50%);
+    transform:translate3d(-50%,0,0);
   }
 }
 
