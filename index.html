@@ -654,21 +654,17 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
 .qb-track{
   display:flex;
   width:max-content;
+  will-change:transform;
 }
 .qb-track-inner{
   display:flex;
-  gap: clamp(24px, 3vw, 48px);
   align-items:center;
   flex-shrink:0;
-  min-width:100%;
-  padding: 0 clamp(12px, 1.5vw, 24px);
-  will-change:transform;
-  animation: qb-marquee-safari 90s linear infinite;
+  white-space:nowrap;
 }
 .qb-track-inner span{
   display:inline-flex;
   align-items:center;
-  gap: clamp(6px, 0.8vw, 10px);
   flex-shrink:0;
   white-space:nowrap;
   font-size: clamp(12.5px, 1vw, 14px);
@@ -683,14 +679,9 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
   height:6px;
   border-radius:50%;
   background:var(--accent);
+  margin-right:12px;
+  margin-left:12px;
   flex-shrink:0;
-}
-@keyframes qb-marquee-safari{
-  from{ transform:translate3d(0,0,0); }
-  to{ transform:translate3d(-100%,0,0); }
-}
-@supports (font-display:swap){
-  .qb-track-inner{ text-rendering:optimizeSpeed; }
 }
 @keyframes splash-pulse {
   0%   { transform: scale(0.94); }
@@ -1730,7 +1721,7 @@ footer{
 
 <!-- QUICK BENEFITS -->
 <div class="quick-benefits">
-  <div class="qb-track">
+  <div class="qb-track" id="qb-track">
     <div class="qb-track-inner">
       <span>Diagnóstico e manutenção</span>
       <span>Painel e evaporador</span>
@@ -2789,8 +2780,20 @@ footer{
     if(e.key === 'Escape' && chatPopup.classList.contains('open')) closeChat();
   });
 
-  // ---------- MARQUEE (prefers-reduced-motion) ----------
-  // animacao via @keyframes qb-marquee-safari nos .qb-track-inner
+  // ---------- MARQUEE (requestAnimationFrame) ----------
+  (function(){
+    var qbTrack = document.getElementById('qb-track');
+    if (!qbTrack || reduced) return;
+    var qbPos = 0, qbSpeed = 0.6;
+    function qbStep(){
+      qbPos -= qbSpeed;
+      var half = qbTrack.scrollWidth / 2;
+      if (Math.abs(qbPos) >= half) qbPos = 0;
+      qbTrack.style.transform = 'translate3d(' + qbPos + 'px,0,0)';
+      requestAnimationFrame(qbStep);
+    }
+    requestAnimationFrame(qbStep);
+  })();
 })();
 </script>
 
