@@ -687,8 +687,14 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
 
 
 @keyframes splash-pulse{
-  0%{ transform:scale(0.97); }
-  100%{ transform:scale(1.03); }
+  0%{ transform:scale(0.95); }
+  100%{ transform:scale(1.05); }
+}
+.splash-logo{
+  animation: splash-pulse 2.5s ease-in-out infinite alternate;
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 /* ---------- STRIP BENEFITS ---------- */
@@ -1564,7 +1570,7 @@ footer{
 
 <!-- SPLASH SCREEN -->
 <div id="splash" style="position:fixed;inset:0;z-index:9999;background:#fff;display:flex;align-items:center;justify-content:center;transition:opacity .4s ease,visibility .4s ease">
-  <img src="/img/logo.png" alt="TECNOAR" fetchpriority="high" decoding="sync" style="width:clamp(80px,18vw,160px);height:auto;animation:splash-pulse 2.4s ease-in-out infinite alternate">
+  <img src="/img/logo.png" alt="TECNOAR" fetchpriority="high" decoding="sync" class="splash-logo" style="width:clamp(80px,18vw,160px);height:auto;">
 </div>
 
 <!-- TOP BAR -->
@@ -2338,16 +2344,20 @@ footer{
 
   // ---------- SCROLL PROGRESS BAR ----------
   const scrollBar = document.createElement('div');
-  scrollBar.style.cssText = 'position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-light));z-index:10001;width:0;will-change:width;transition:width .25s ease-out;';
+  scrollBar.id = 'progress-bar';
+  scrollBar.style.cssText = 'position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent-light));z-index:10001;transform:scaleX(0);transform-origin:left;will-change:transform;transition:transform .12s cubic-bezier(.4,0,.2,1);';
   document.body.appendChild(scrollBar);
-  let barPending = false;
+  let barTicking = false, lastProgress = 0;
   window.addEventListener('scroll', ()=>{
-    if(!barPending){
-      barPending = true;
+    if(!barTicking){
+      barTicking = true;
       requestAnimationFrame(()=>{
-        barPending = false;
+        barTicking = false;
         const h = document.documentElement.scrollHeight - window.innerHeight;
-        scrollBar.style.width = Math.min(100, (window.scrollY / h) * 100) + '%';
+        let p = h > 0 ? Math.min(window.scrollY / h, 1) : 0;
+        p = lastProgress * 0.85 + p * 0.15;
+        lastProgress = p;
+        scrollBar.style.transform = 'scaleX(' + p + ')';
       });
     }
   }, { passive: true });
