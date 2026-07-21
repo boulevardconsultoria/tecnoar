@@ -466,7 +466,7 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
   min-height: 100dvh;
   background: var(--primary-dark);
   color: #fff;
-  padding: calc(var(--header-h) + var(--topbar-h) + clamp(40px, 5vw, 80px)) 0 clamp(40px, 5vw, 80px);
+  padding: calc(var(--header-h) + var(--topbar-h) + clamp(24px, 3vw, 40px)) 0 clamp(28px, 3vw, 48px);
   position: relative;
   overflow: hidden;
   display:flex;
@@ -484,16 +484,15 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
 .hero-inner{
   display:grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(32px, 5vw, 60px);
+  gap: clamp(24px, 3.6vw, 44px);
   align-items:center;
   position:relative;
   z-index:2;
   width:100%;
 }
 @media (max-width: 700px){
-  .hero-inner{ grid-template-columns: 1fr; gap: clamp(28px, 4vw, 36px); }
-  .hero-visual{ max-width: min(400px, 100%); margin: 0 auto; }
-  .hero-img-sub{ display: none; }
+  .hero-inner{ grid-template-columns: 1fr; gap: clamp(20px, 3vw, 28px); }
+  .hero-imgs{ max-width: min(400px, 100%); margin: 0 auto; }
   .temp-stat{ bottom: clamp(12px, 2vw, 20px); top: auto; }
 }
 .hero-desktop{ display:contents; }
@@ -522,27 +521,27 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
 .hero .eyebrow{ color: var(--accent-light); }
 .hero .eyebrow::before{ background: var(--accent-light); }
 .hero h1{
-  font-size: clamp(2rem, 4.8vw, 4rem);
+  font-size: clamp(1.6rem, 3.8vw, 3rem);
   color: #fff;
   font-weight: 700;
   max-width: 14ch;
-  margin-bottom: clamp(12px, 1.4vw, 18px);
+  margin-bottom: clamp(10px, 1vw, 14px);
   letter-spacing: -0.02em;
   line-height: 1.1;
 }
 .hero h1 em{ font-style:normal; color: var(--accent-light); }
 .hero p.lede{
-  font-size: clamp(15px, 1.3vw, 18px);
+  font-size: clamp(14px, 1.1vw, 16px);
   color: rgba(255,255,255,0.65);
   max-width: 48ch;
-  margin-bottom: clamp(24px, 2.5vw, 32px);
-  line-height: 1.7;
+  margin-bottom: clamp(14px, 1.6vw, 22px);
+  line-height: 1.6;
 }
 .hero-checklist{
   display:grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(8px, 0.8vw, 10px) clamp(16px, 2vw, 24px);
-  margin-bottom: clamp(24px, 2.8vw, 36px);
+  margin-bottom: clamp(14px, 1.6vw, 22px);
   max-width: 460px;
 }
 .hero-checklist li{
@@ -556,7 +555,7 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
   display:flex;
   gap: clamp(10px, 1.2vw, 14px);
   flex-wrap:wrap;
-  margin-bottom: clamp(28px, 3.2vw, 40px);
+  margin-bottom: clamp(16px, 1.8vw, 24px);
 }
 .btn{
   padding: clamp(12px, 1.2vw, 16px) clamp(24px, 2.4vw, 32px);
@@ -586,21 +585,18 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
   flex-direction:column;
   align-items:center;
 }
-.hero-img-main{
-  width: 100%;
-  aspect-ratio: 4/5;
-  object-fit: cover;
-  border-radius: var(--radius);
+.hero-imgs{
+  display:flex;
+  gap: clamp(8px, 1.2vw, 14px);
+  width:100%;
 }
-.hero-img-sub{
-  position: absolute;
-  width: min(46%, 200px);
+.hero-imgs img{
+  flex:1;
   aspect-ratio: 4/3;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 3px solid var(--primary-dark);
-  bottom: clamp(-18px, -2vw, -26px);
-  left: clamp(-20px, -2.5vw, -30px);
+  object-fit:cover;
+  border-radius: var(--radius);
+  min-width:0;
+  max-height: clamp(180px, 22vh, 280px);
 }
 
 /* ---------- TEMP STAT ---------- */
@@ -1549,7 +1545,7 @@ footer{
     --header-h-shrunk: 48px;
   }
   .hero{ min-height: auto; padding: calc(var(--header-h) + var(--topbar-h) + clamp(16px, 3vw, 20px)) 0 clamp(24px, 5vw, 28px); }
-  .hero h1{ font-size: clamp(1.5rem, 7vw, 1.8rem); }
+  .hero h1{ font-size: clamp(1.4rem, 6vw, 1.6rem); }
   .hero p.lede{ font-size: clamp(13px, 3.6vw, 15px); }
   .hero-checklist{ grid-template-columns: 1fr; gap: 6px; }
   .btn{ width: 100%; justify-content:center; }
@@ -1577,7 +1573,7 @@ footer{
   .float-btn{ width: clamp(42px, 10vw, 48px); height: clamp(42px, 10vw, 48px); }
   .hero-inner{ gap: clamp(24px, 4vw, 28px); }
   .hero-visual{ max-width: 100%; }
-  .hero-img-main{ aspect-ratio: 16/9; border-radius: 12px; }
+  .hero-imgs img{ aspect-ratio: 16/9; }
   .temp-stat{
     position: relative;
     inset: auto;
@@ -1729,8 +1725,10 @@ footer{
       </div>
 
       <div class="hero-visual reveal reveal-delay-2">
-        <img class="hero-img-main" src="https://i.ibb.co/ymtYn4FB/Save-Clip-App-652772046-18091087487149176-4503806795399529223-n.jpg" alt="Serviço de ar-condicionado automotivo na TECNOAR" fetchpriority="high">
-        <img class="hero-img-sub" src="https://i.ibb.co/6JZqZPNb/Save-Clip-App-657233599-18094464554038648-2668191874854087859-n.jpg" alt="Diagnóstico de ar-condicionado na TECNOAR" loading="lazy">
+        <div class="hero-imgs">
+          <img src="https://i.ibb.co/93y1Sz3K/Save-Clip-App-659426136-18031464692612600-5883155720281195724-n.jpg" alt="Serviço de ar-condicionado automotivo na TECNOAR" fetchpriority="high">
+          <img src="https://i.ibb.co/JRhRFTsH/Save-Clip-App-652765422-18109063006789137-5183237842325604522-n.jpg" alt="Diagnóstico de ar-condicionado na TECNOAR" loading="lazy">
+        </div>
         <div class="temp-stat" id="tempPanel">
           <div class="temp-stat-value" id="tempNumber"><span id="tempValue">31</span><span class="deg">°C</span></div>
           <div class="temp-stat-label">temperatura de saída</div>
