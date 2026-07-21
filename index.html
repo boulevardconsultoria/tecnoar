@@ -653,7 +653,11 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
 .qb-track{
   display:flex;
   width:max-content;
-  animation: qb-scroll 68s linear infinite;
+  will-change: transform;
+  transform: translate3d(0,0,0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  animation: qb-scroll 90s linear infinite;
 }
 .qb-track-inner{
   display:flex;
