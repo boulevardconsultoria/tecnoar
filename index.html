@@ -653,7 +653,7 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
 .qb-track{
   display:flex;
   width:max-content;
-  animation: qb-scroll 40s linear infinite;
+  animation: qb-scroll 68s linear infinite;
 }
 .qb-track-inner{
   display:flex;
@@ -686,15 +686,17 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
 }
 
 
-@keyframes splash-pulse{
-  0%{ transform:scale(0.95); }
-  100%{ transform:scale(1.05); }
+@keyframes splash-pulse {
+  0%   { transform: scale(0.94); }
+  100% { transform: scale(1.06); }
 }
-.splash-logo{
-  animation: splash-pulse 2.5s ease-in-out infinite alternate;
+.splash-logo {
+  animation: splash-pulse 3.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate !important;
   will-change: transform;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 
 /* ---------- STRIP BENEFITS ---------- */
@@ -2345,18 +2347,16 @@ footer{
   // ---------- SCROLL PROGRESS BAR ----------
   const scrollBar = document.createElement('div');
   scrollBar.id = 'progress-bar';
-  scrollBar.style.cssText = 'position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent-light));z-index:10001;transform:scaleX(0);transform-origin:left;will-change:transform;transition:transform .12s cubic-bezier(.4,0,.2,1);';
+  scrollBar.style.cssText = 'position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent-light));z-index:10001;transform:scaleX(0);transform-origin:left;will-change:transform;transition:transform .05s linear;';
   document.body.appendChild(scrollBar);
-  let barTicking = false, lastProgress = 0;
+  let barTicking = false;
   window.addEventListener('scroll', ()=>{
     if(!barTicking){
       barTicking = true;
       requestAnimationFrame(()=>{
         barTicking = false;
         const h = document.documentElement.scrollHeight - window.innerHeight;
-        let p = h > 0 ? Math.min(window.scrollY / h, 1) : 0;
-        p = lastProgress * 0.85 + p * 0.15;
-        lastProgress = p;
+        const p = h > 0 ? Math.min(window.scrollY / h, 1) : 0;
         scrollBar.style.transform = 'scaleX(' + p + ')';
       });
     }
