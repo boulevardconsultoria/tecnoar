@@ -686,6 +686,11 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
 }
 
 
+@keyframes splash-pulse{
+  0%{ transform:scale(0.97); }
+  100%{ transform:scale(1.03); }
+}
+
 /* ---------- STRIP BENEFITS ---------- */
 .strip-benefits{
   background: #fff;
@@ -1559,7 +1564,7 @@ footer{
 
 <!-- SPLASH SCREEN -->
 <div id="splash" style="position:fixed;inset:0;z-index:9999;background:#fff;display:flex;align-items:center;justify-content:center;transition:opacity .4s ease,visibility .4s ease">
-  <img src="/img/logo.png" alt="TECNOAR" fetchpriority="high" decoding="sync" style="width:clamp(80px,18vw,160px);height:auto;">
+  <img src="/img/logo.png" alt="TECNOAR" fetchpriority="high" decoding="sync" style="width:clamp(80px,18vw,160px);height:auto;animation:splash-pulse 2.4s ease-in-out infinite alternate">
 </div>
 
 <!-- TOP BAR -->
@@ -2331,43 +2336,40 @@ footer{
   }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
   revealEls.forEach(el=>rvIo.observe(el));
 
-  // ---------- 60fps RAF HELPER (ProMotion / 120Hz safe) ----------
-  const RAF_INTERVAL = 16.67;
-  function createRafThrottle(handler, interval){
-    interval = interval || RAF_INTERVAL;
-    let last = 0, rafId = null;
-    function loop(now){
-      if(now - last >= interval){
-        last = now - (now - last) % interval;
-        handler();
-      }
-      rafId = requestAnimationFrame(loop);
-    }
-    return function start(){ if(!rafId) rafId = requestAnimationFrame(loop); };
-  }
-
   // ---------- SCROLL PROGRESS BAR ----------
   const scrollBar = document.createElement('div');
-  scrollBar.style.cssText = 'position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-light));z-index:10001;width:0;will-change:width;';
+  scrollBar.style.cssText = 'position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-light));z-index:10001;width:0;will-change:width;transition:width .25s ease-out;';
   document.body.appendChild(scrollBar);
-  const updateProgress = createRafThrottle(()=>{
-    const h = document.documentElement.scrollHeight - window.innerHeight;
-    scrollBar.style.width = Math.min(100, (window.scrollY / h) * 100) + '%';
-  }, RAF_INTERVAL);
-  window.addEventListener('scroll', updateProgress, { passive: true });
+  let barPending = false;
+  window.addEventListener('scroll', ()=>{
+    if(!barPending){
+      barPending = true;
+      requestAnimationFrame(()=>{
+        barPending = false;
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        scrollBar.style.width = Math.min(100, (window.scrollY / h) * 100) + '%';
+      });
+    }
+  }, { passive: true });
 
   // ---------- PARALLAX HERO BG ----------
   const heroBg = document.querySelector('.hero-bg');
   if(heroBg && !reduced){
     const hero = document.getElementById('heroSection');
-    const updateParallax = createRafThrottle(()=>{
-      const y = window.scrollY;
-      if(hero){
-        const heroBottom = hero.offsetTop + hero.offsetHeight;
-        if(y <= heroBottom) heroBg.style.transform = 'translateY(' + (y * 0.2) + 'px)';
+    let parPending = false;
+    window.addEventListener('scroll', ()=>{
+      if(!parPending){
+        parPending = true;
+        requestAnimationFrame(()=>{
+          parPending = false;
+          const y = window.scrollY;
+          if(hero){
+            const heroBottom = hero.offsetTop + hero.offsetHeight;
+            if(y <= heroBottom) heroBg.style.transform = 'translateY(' + (y * 0.2) + 'px)';
+          }
+        });
       }
-    }, RAF_INTERVAL);
-    window.addEventListener('scroll', updateParallax, { passive: true });
+    }, { passive: true });
   }
 
   // ---------- TEMPERATURE STAT ANIMATION ----------
@@ -2459,22 +2461,27 @@ footer{
   // ---------- HEADER HIDE/SHOW + TOPBAR ----------
   const nav = document.getElementById('siteNav');
   let lastY = window.scrollY;
+  let headerPending = false;
 
-  const updateHeader = createRafThrottle(()=>{
-    const y = window.scrollY;
-    nav.classList.toggle('nav-scrolled', y > 20);
-    nav.classList.toggle('nav-shrunk', y > 60);
-    if(y > lastY && y > 150){
-      nav.classList.add('nav-hidden');
-    } else {
-      nav.classList.remove('nav-hidden');
+  window.addEventListener('scroll', ()=>{
+    if(!headerPending){
+      headerPending = true;
+      requestAnimationFrame(()=>{
+        headerPending = false;
+        const y = window.scrollY;
+        nav.classList.toggle('nav-scrolled', y > 20);
+        nav.classList.toggle('nav-shrunk', y > 60);
+        if(y > lastY && y > 150){
+          nav.classList.add('nav-hidden');
+        } else {
+          nav.classList.remove('nav-hidden');
+        }
+        lastY = y;
+        const backBtn = document.getElementById('backToTop');
+        if(backBtn) backBtn.classList.toggle('show', y > 600);
+      });
     }
-    lastY = y;
-    const backBtn = document.getElementById('backToTop');
-    if(backBtn) backBtn.classList.toggle('show', y > 600);
-  }, RAF_INTERVAL);
-
-  window.addEventListener('scroll', updateHeader, { passive: true });
+  }, { passive: true });
 
   // ---------- MOBILE DRAWER ----------
   const hamburger = document.getElementById('hamburgerBtn');
