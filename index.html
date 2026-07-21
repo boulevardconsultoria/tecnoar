@@ -1075,6 +1075,68 @@ header.nav.nav-scrolled{ box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
 }
 
 /* ---------- FAQ CHAT ---------- */
+.chat-popup{
+  position:fixed;
+  bottom: clamp(80px, 12vw, 100px);
+  right: clamp(16px, 2.4vw, 26px);
+  width: min(92vw, 380px);
+  max-height: 70vh;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: clamp(14px, 1.4vw, 18px);
+  overflow:hidden;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.18), 0 4px 16px rgba(0,0,0,0.08);
+  z-index: 500;
+  display:flex;
+  flex-direction:column;
+  transform: translateY(20px) scale(0.95);
+  opacity:0;
+  pointer-events:none;
+  transition: transform .3s cubic-bezier(.22,1,.36,1), opacity .25s ease;
+  transform-origin: bottom right;
+}
+.chat-popup.open{
+  transform: translateY(0) scale(1);
+  opacity:1;
+  pointer-events:auto;
+}
+.chat-popup-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: clamp(14px, 1.4vw, 18px) clamp(18px, 1.8vw, 22px);
+  border-bottom: 1px solid var(--line);
+  background: var(--primary);
+  color:#fff;
+  flex-shrink:0;
+}
+.chat-popup .chat-msgs{
+  max-height: 380px;
+  flex:1;
+  overflow-y:auto;
+}
+.chat-popup-close{
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.1);
+  display:flex; align-items:center; justify-content:center;
+  transition: background .2s;
+  flex-shrink:0;
+  color:#fff;
+}
+.chat-popup-close:hover{ background: rgba(255,255,255,0.2); }
+.chat-overlay{
+  position:fixed; inset:0; z-index:499;
+  background: rgba(0,0,0,0.35);
+  opacity:0; pointer-events:none;
+  transition: opacity .25s ease;
+}
+.chat-overlay.open{ opacity:1; pointer-events:auto; }
+.float-chat{
+  background: var(--accent);
+}
+.float-chat:hover{ opacity:0.85; }
+
 .chat-wrap{
   max-width: 600px;
   margin: 0 auto;
@@ -2197,46 +2259,30 @@ footer{
   </div>
 </section>
 
-<!-- FAQ CHAT -->
-<section class="section" id="faqChat">
+<!-- FAQ (estático para SEO) -->
+<section class="section" id="faq">
   <div class="wrap">
     <div class="section-head centered reveal-right">
       <div class="eyebrow">Dúvidas frequentes</div>
       <h2>Perguntas que a gente mais recebe</h2>
     </div>
-
-    <div class="chat-wrap reveal-left">
-      <div class="chat-header">
-        <div class="chat-header-info">
-          <div class="chat-avatar">T</div>
-          <div>
-            <div class="chat-name">Assistente TECNOAR</div>
-            <div class="chat-status">Online</div>
-          </div>
-        </div>
-        <button class="chat-clear" id="chatClear" aria-label="Limpar conversa">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-        </button>
-      </div>
-      <div class="chat-msgs" id="chatMsgs">
-        <div class="msg msg-bot">
-          <div class="msg-bubble">
-            Olá! 😊 Eu sou o assistente virtual da TECNOAR.<br><br>
-            Pergunte sobre nossos serviços, agendamento, diagnóstico, prazos ou qualquer dúvida sobre ar-condicionado automotivo.<br><br>
-            <strong>Exemplos:</strong><br>
-            • "Precisa agendar?"<br>
-            • "Atende qualquer marca?"<br>
-            • "Quanto tempo demora?"<br>
-            • "Como funciona o diagnóstico?"
-          </div>
-        </div>
-      </div>
-      <div class="chat-input-wrap">
-        <input class="chat-input" id="chatInput" type="text" placeholder="Digite sua dúvida..." autocomplete="off">
-        <button class="chat-send" id="chatSend" aria-label="Enviar">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        </button>
-      </div>
+    <div class="faq-list reveal-left" itemscope itemtype="https://schema.org/FAQPage">
+      <details class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <summary itemprop="name">Preciso agendar horário para levar o carro?</summary>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">O ideal é chamar no WhatsApp antes, pra já chegar direto pra bancada sem esperar. Avaliações rápidas também são feitas na hora, conforme a agenda do dia.</p></div>
+      </details>
+      <details class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <summary itemprop="name">A TECNOAR atende carros de qualquer marca e modelo?</summary>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">Sim. O sistema de ar-condicionado segue o mesmo princípio entre marcas, e a oficina tem equipamento compatível com R-134a e R-1234yf.</p></div>
+      </details>
+      <details class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <summary itemprop="name">Como funciona o diagnóstico antes do orçamento?</summary>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">O sistema é pressurizado com nitrogênio e testado com detector eletrônico de vazamento antes de qualquer peça ser aberta. O orçamento só é fechado depois de identificada a causa real.</p></div>
+      </details>
+      <details class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <summary itemprop="name">Quanto tempo demora um serviço de ar-condicionado?</summary>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">Varia com o serviço: recarga de gás ou higienização costuma resolver no mesmo dia; reparos de compressor ou evaporador podem levar mais tempo, dependendo da peça.</p></div>
+      </details>
     </div>
   </div>
 </section>
@@ -2279,10 +2325,49 @@ footer{
   </div>
 </footer>
 
+<!-- CHAT POPUP -->
+<div class="chat-overlay" id="chatOverlay"></div>
+<div class="chat-popup" id="chatPopup">
+  <div class="chat-popup-header">
+    <div class="chat-header-info">
+      <div class="chat-avatar">T</div>
+      <div>
+        <div class="chat-name">Assistente TECNOAR</div>
+        <div class="chat-status">Online</div>
+      </div>
+    </div>
+    <button class="chat-popup-close" id="chatPopupClose" aria-label="Fechar chat">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="chat-msgs" id="chatMsgs">
+    <div class="msg msg-bot">
+      <div class="msg-bubble">
+        Olá! 😊 Eu sou o assistente virtual da TECNOAR.<br><br>
+        Pergunte sobre nossos serviços, agendamento, diagnóstico, prazos ou qualquer dúvida sobre ar-condicionado automotivo.<br><br>
+        <strong>Exemplos:</strong><br>
+        • "Precisa agendar?"<br>
+        • "Atende qualquer marca?"<br>
+        • "Quanto tempo demora?"<br>
+        • "Como funciona o diagnóstico?"
+      </div>
+    </div>
+  </div>
+  <div class="chat-input-wrap">
+    <input class="chat-input" id="chatInput" type="text" placeholder="Digite sua dúvida..." autocomplete="off">
+    <button class="chat-send" id="chatSend" aria-label="Enviar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+</div>
+
 <!-- FLOATING BUTTONS -->
 <div class="float-stack">
   <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#24313F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+  <button class="float-btn float-chat" id="chatToggle" aria-label="Abrir chat">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
   </button>
   <a class="float-btn float-ig" href="https://www.instagram.com/tecnoar_cebinho" target="_blank" rel="noopener" aria-label="Instagram">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff"/></svg>
@@ -2669,7 +2754,23 @@ footer{
   const chatMsgs = document.getElementById('chatMsgs');
   const chatInput = document.getElementById('chatInput');
   const chatSend = document.getElementById('chatSend');
-  const chatClear = document.getElementById('chatClear');
+  const chatToggle = document.getElementById('chatToggle');
+  const chatPopup = document.getElementById('chatPopup');
+  const chatOverlay = document.getElementById('chatOverlay');
+  const chatPopupClose = document.getElementById('chatPopupClose');
+
+  function openChat(){
+    chatPopup.classList.add('open');
+    chatOverlay.classList.add('open');
+    chatMsgs.scrollTop = chatMsgs.scrollHeight;
+  }
+  function closeChat(){
+    chatPopup.classList.remove('open');
+    chatOverlay.classList.remove('open');
+  }
+  if(chatToggle) chatToggle.addEventListener('click', openChat);
+  if(chatPopupClose) chatPopupClose.addEventListener('click', closeChat);
+  if(chatOverlay) chatOverlay.addEventListener('click', closeChat);
 
   function addTyping(){
     const d = document.createElement('div');
@@ -2733,11 +2834,9 @@ footer{
       if(e.key === 'Enter'){ e.preventDefault(); handleQuestion(chatInput.value); }
     });
   }
-  if(chatClear && chatMsgs){
-    chatClear.addEventListener('click', () => {
-      chatMsgs.innerHTML = '<div class="msg msg-bot"><div class="msg-bubble">Olá! 😊 Eu sou o assistente virtual da TECNOAR.<br><br>Pergunte sobre nossos serviços, agendamento, diagnóstico, prazos ou qualquer dúvida sobre ar-condicionado automotivo.<br><br><strong>Exemplos:</strong><br>• "Precisa agendar?"<br>• "Atende qualquer marca?"<br>• "Quanto tempo demora?"<br>• "Como funciona o diagnóstico?"</div></div>';
-    });
-  }
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && chatPopup.classList.contains('open')) closeChat();
+  });
 })();
 </script>
 
